@@ -5,7 +5,7 @@ const MongoDBSession = require("connect-mongodb-session")(session);
 const mongoose = require("mongoose");
 const app = express();
 const UserModel = require("./models/User");
-
+const PORT = process.env.PORT || 3000;
 const bcrypt = require("bcryptjs");
 
 // Session collection data storing
