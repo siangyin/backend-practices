@@ -7,13 +7,6 @@ const app = express();
 const UserModel = require("./models/User");
 
 const bcrypt = require("bcryptjs");
-const salt = 12;
-
-// Connect to Mongo
-mongoose.connect(process.env.MONGO_URI, (err) => {
-	if (err) throw err;
-	console.log("connected to MongoDB");
-});
 
 // Session collection data storing
 const store = new MongoDBSession({
@@ -58,7 +51,7 @@ app.get("/", (req, res) => {
 app.get("/login", (req, res) => {
 	const error = req.session.error;
 	delete req.session.error;
-	res.render("login");
+	res.render("login", { err: error });
 });
 
 app.post("/login", async (req, res) => {
@@ -117,6 +110,19 @@ app.post("/logout", (req, res) => {
 	});
 });
 
-app.listen(process.env.PORT, () => {
-	console.log(`server on http://localhost:${process.env.PORT}`);
-});
+// Connect to Mongo
+const connectDB = async () => {
+	try {
+		await mongoose.connect(process.env.MONGO_URI);
+		app.listen(process.env.PORT, () => {
+			console.log(
+				`Connected MongoDB & server on http://localhost:${process.env.PORT}`
+			);
+		});
+	} catch (error) {
+		console.log("Something went wrong with Database connection");
+		process.exit(1);
+	}
+};
+
+connectDB();

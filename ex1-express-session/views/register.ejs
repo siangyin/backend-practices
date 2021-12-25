@@ -41,7 +41,9 @@
 								class="form-control form-control-lg mb-3"
 							/>
 
-							<p class="text-danger">err msg</p>
+							<% if(err) { %>
+							<p class="text-danger"><%= err %></p>
+							<% } %>
 
 							<!-- Submit button -->
 							<button type="submit" class="btn btn-primary btn-lg btn-block">
