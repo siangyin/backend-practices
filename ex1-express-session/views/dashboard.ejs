@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<%- include("partials/header") %>
+
+	<body>
+		<section id="secret">
+			<%- include("partials/nav") %>
+			<div
+				class="cover-container d-flex h-90 p-3 mx-auto flex-column text-center"
+			>
+				<main role="main" class="inner cover text-white">
+					<h1 class="cover-heading">Your secret is safe here</h1>
+					<p class="lead">
+						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente
+						eligendi neque soluta eveniet ab distinctio voluptatem fugit maxime
+						aperiam modi, reprehenderit tempore molestiae? Debitis quis labore
+						at earum, beatae cum?
+					</p>
+				</main>
+				<form action="/logout" method="POST">
+					<button class="btn btn-light">Logout</button>
+				</form>
+			</div>
+		</section>
+		<%- include("partials/footer") %>
+	</body>
+</html>
