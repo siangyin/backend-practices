@@ -4,6 +4,7 @@ const session = require("express-session");
 const MongoDBSession = require("connect-mongodb-session")(session);
 const mongoose = require("mongoose");
 const app = express();
+const UserModal = require("./models/User");
 
 // Connect to Mongo
 mongoose.connect(process.env.MONGO_URI, (err) => {
@@ -19,6 +20,7 @@ const store = new MongoDBSession({
 
 // to access to views dir
 app.set("view engine", "ejs");
+// converting form-data to JSON, allow post/put req to pass data to server
 app.use(express.urlencoded({ extended: true }));
 
 // to access public dir such as css
