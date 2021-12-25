@@ -38,15 +38,26 @@ app.use(
 	})
 );
 
+// middleware isAuth
+const isAuth = (req, res, next) => {
+	if (req.session.isAuth) {
+		next();
+	} else {
+		req.session.error = "Please login to access";
+		res.redirect("/login");
+	}
+};
+
 //=================== Routes
 // Landing Page
 app.get("/", (req, res) => {
-	// req.session.isAuth = true;
-	// console.log(req.session);
 	res.render("landing");
 });
 
+// Login Page
 app.get("/login", (req, res) => {
+	const error = req.session.error;
+	delete req.session.error;
 	res.render("login");
 });
 
@@ -55,20 +66,27 @@ app.post("/login", async (req, res) => {
 	let user = await UserModel.findOne({ email });
 
 	if (!user) {
+		req.session.error = "Invalid Credentials";
 		return res.redirect("/login");
 	}
 
 	const isMatch = await bcrypt.compare(password, user.password);
 
 	if (!isMatch) {
-		return res.redirect("/login");
+		req.session.error = "Invalid Credentials";
+		return res.redirect("/login", { err: error });
 	}
 
+	req.session.isAuth = true;
+	req.session.username = user.username;
 	res.redirect("/dashboard");
 });
 
+// Register Page
 app.get("/register", (req, res) => {
-	res.render("register");
+	const error = req.session.error;
+	delete req.session.error;
+	res.render("register", { err: error });
 });
 
 app.post("/register", async (req, res) => {
@@ -85,8 +103,18 @@ app.post("/register", async (req, res) => {
 	res.redirect("/login");
 });
 
-app.get("/dashboard", (req, res) => {
-	res.render("dashboard");
+// Dashboard Page
+app.get("/dashboard", isAuth, (req, res) => {
+	const username = req.session.username;
+	res.render("dashboard", { name: username });
+});
+
+// Logout
+app.post("/logout", (req, res) => {
+	req.session.destroy((err) => {
+		if (err) throw err;
+		res.redirect("/");
+	});
 });
 
 app.listen(process.env.PORT, () => {
