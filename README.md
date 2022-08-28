@@ -1,7 +1,7 @@
 # Backend practices
 
-## ex1-express-session
-demo links: http://ex1-express-session.herokuapp.com/
+## Express Session EJS Landing page [demo links]
+[demo links]: http://ex1-express-session.herokuapp.com/
 
 Learning 
 - Authentication
@@ -19,7 +19,7 @@ Learning
 	},
   ```
   
-  ### Front-end 
+  ### UI
 
 <img width="500" alt="img" src="https://github.com/siangyin/backend-practices/blob/main/ui/ex1_landing.png?raw=true">
 
