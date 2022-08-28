@@ -18,3 +18,11 @@ Learning
 		"mongoose": "^6.1.3"
 	},
   ```
+  
+  ### Front-end 
+
+<img width="500" alt="img" src="https://github.com/siangyin/backend-practices/blob/main/ui/ex1_landing.png?raw=true">
+
+<img width="500" alt="img" src="https://github.com/siangyin/backend-practices/blob/main/ui/ex1_login.png?raw=true">
+
+<img width="500" alt="img" src="https://github.com/siangyin/backend-practices/blob/main/ui/ex1_register.png?raw=true">
