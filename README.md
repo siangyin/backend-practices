@@ -1,6 +1,6 @@
 # Backend practices
 
-## Express Session EJS Landing page [demo links]
+## Express Session EJS Landing page | [demo links]
 [demo links]: http://ex1-express-session.herokuapp.com/
 
 Learning 
